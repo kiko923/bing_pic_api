@@ -102,66 +102,130 @@ https://www.lanzous.com/i96nide
 
 
 
-API
-https://bing.com/HPImageArchive.aspx 14
 
-或
 
-https://cn.bing.com/HPImageArchive.aspx 10
+# 【原创】通过API获取每日必应壁纸 Bing Wallpaper
 
-完整示例
+## [](#p-1001496-api-1)API
 
-https://cn.bing.com/HPImageArchive.aspx?format=js&mkt=zh-CN&idx=0&n=8&nc=1612409408851&pid=hp&FORM=BEHPTB&uhd=1&uhdwidth=3840&uhdheight=2160 24
+> [https://bing.com/HPImageArchive.aspx 14](https://bing.com/HPImageArchive.aspx)
+> 
+> 或
+> 
+> [https://cn.bing.com/HPImageArchive.aspx 10](https://cn.bing.com/HPImageArchive.aspx)
+> 
+> 完整示例
+> 
+> [https://cn.bing.com/HPImageArchive.aspx?format=js&mkt=zh-CN&idx=0&n=8&nc=1612409408851&pid=hp&FORM=BEHPTB&uhd=1&uhdwidth=3840&uhdheight=2160 24](https://cn.bing.com/HPImageArchive.aspx?format=js&mkt=zh-CN&idx=0&n=8&nc=1612409408851&pid=hp&FORM=BEHPTB&uhd=1&uhdwidth=3840&uhdheight=2160)
 
-参数
-参数名	参数值	描述
-format	js/rss/xml	决定返回结果格式，==必填==
-idx	-1 到 8 的整数	日期偏移量，若空或0则返回本日数据，-1返回明日，1返回昨日，以此类推，==必填==
-n	1 到 8 的整数	返回结果数量，==必填==
-mkt	en-US / zh-CN	决定国家地区，==若访问IP为大陆，此参数失效，强制返回zh-CN结果==
-uhd	1	若为空或0，返回1080P结果，若为 1 则返回4K结果，==从2019.05.10开始支持==
-uhdwidth=3840	3840	与 uhd 字段搭配使用，可为空，决定返回的 url 字段的分辨率参数，意义不大
-uhdheight=2160	2160	与 uhd 字段搭配使用，可为空，决定返回的 url 字段的分辨率参数，意义不大
-pid	hp	若为空，返回结果的 copyrightlink 字段带域名，若非空则不带域名
-nc	13位时间戳	根据时间筛选，由于 idx 存在限制，意义不大，可为空
-FROM	BEHPTB / REDIRERR	目前作用存疑，疑似区分国内版/国际版？可为空
-调用方式
-Http 请求
-注意
-使用大陆IP访问会导致 mkt 字段失效
+## [](#p-1001496-h-2)参数
 
-==过久的图片会变成同一张！！切记及时下载保存==，例如：
+参数名
 
-bing.com/az/hprichbg/rb/JulianAlps_ZH-CN11764181030_1920x1080.jpg 10
+参数值
 
-bing.com/az/hprichbg/rb/Policewomen_ZH-CN9260416327_1920x1080.jpg 8
+描述
 
-从2019-05-10开始，支持 UHD 格式
+format
 
-从 url 的结构有两种
+js/rss/xml
 
-2019-03-08的url内容
+决定返回结果格式，==必填==
 
-“url”: “/az/hprichbg/rb/Policewomen_ZH-CN9260416327_1920x1080.jpg”,
+idx
 
-2019-03-09的url内容
+\-1 到 8 的整数
 
-“url”: “/th?id=OHR.GrapeHarvest_ZH-CN9372743517_1920x1080.jpg&rf=NorthMale_1920x1080.jpg&pid=hp”,
+日期偏移量，若空或0则返回本日数据，-1返回明日，1返回昨日，以此类推，==必填==
 
-可以使用如下两种方式对图片进行缩放，以这两张图片为例
+n
 
-https://cn.bing.com/th?id=OHR.RPIR_EN-US1987126650_UHD.jpg 2 ==注意这里的UHD，下面会去掉==
+1 到 8 的整数
 
-https://cn.bing.com/th?id=OHR.SnowBuntings_ZH-CN6554424742.jpg 2
+返回结果数量，==必填==
 
-在.jpg前加上分辨率，此方式下载出的图片即为调整后分辨率，==注意此种方式需要去掉UHD 等标识==
+mkt
 
-https://cn.bing.com/th?id=OHR.RPIR_EN-US1987126650_1366x768.jpg 2 ==去掉UHD标识==
+en-US / zh-CN
 
-https://cn.bing.com/th?id=OHR.SnowBuntings_ZH-CN6554424742_1366x768.jpg 3
+决定国家地区，==若访问IP为大陆，此参数失效，强制返回zh-CN结果==
 
-在地址最后加上参数，此方式适合无需下载的页面展示
+uhd
 
-https://cn.bing.com/th?id=OHR.RPIR_EN-US1987126650_UHD.jpg&w=1366&h=768 4 ==这里则可以继续使用UHD标识==
+1
 
-https://cn.bing.com/th?id=OHR.SnowBuntings_ZH-CN6554424742.jpg&w=1366&h=768 4
+若为空或0，返回`1080P`结果，若为 1 则返回`4K`结果，==从2019.05.10开始支持==
+
+uhdwidth=3840
+
+3840
+
+与 `uhd` 字段搭配使用，可为空，决定返回的 `url` 字段的分辨率参数，意义不大
+
+uhdheight=2160
+
+2160
+
+与 `uhd` 字段搭配使用，可为空，决定返回的 `url` 字段的分辨率参数，意义不大
+
+pid
+
+hp
+
+若为空，返回结果的 `copyrightlink` 字段带域名，若非空则不带域名
+
+nc
+
+13位时间戳
+
+根据时间筛选，由于 `idx` 存在限制，意义不大，可为空
+
+FROM
+
+BEHPTB / REDIRERR
+
+目前作用存疑，疑似区分国内版/国际版？可为空
+
+## [](#p-1001496-h-3)调用方式
+
+*   `Http` 请求
+
+## [](#p-1001496-h-4)注意
+
+*   使用大陆IP访问会导致 `mkt` 字段失效
+    
+*   \==过久的图片会变成同一张！！切记及时下载保存==，例如：
+    
+    > [bing.com/az/hprichbg/rb/JulianAlps_ZH-CN11764181030_1920x1080.jpg 10](http://bing.com/az/hprichbg/rb/JulianAlps_ZH-CN11764181030_1920x1080.jpg)
+    > 
+    > [bing.com/az/hprichbg/rb/Policewomen_ZH-CN9260416327_1920x1080.jpg 8](http://bing.com/az/hprichbg/rb/Policewomen_ZH-CN9260416327_1920x1080.jpg)
+    
+*   从`2019-05-10`开始，支持 `UHD` 格式
+    
+*   从 `url` 的结构有两种
+    
+    *   `2019-03-08`的`url`内容
+        
+        > “url”: “/az/hprichbg/rb/Policewomen\_ZH-CN9260416327\_1920x1080.jpg”,
+        
+    *   `2019-03-09`的`url`内容
+        
+        > “url”: “/th?id=OHR.GrapeHarvest\_ZH-CN9372743517\_1920x1080.jpg&rf=NorthMale\_1920x1080.jpg&pid=hp”,
+        
+*   可以使用如下两种方式对图片进行缩放，以这两张图片为例
+    
+    > [https://cn.bing.com/th?id=OHR.RPIR_EN-US1987126650_UHD.jpg 2](https://cn.bing.com/th?id=OHR.RPIR_EN-US1987126650_UHD.jpg) ==注意这里的UHD，下面会去掉==
+    > 
+    > [https://cn.bing.com/th?id=OHR.SnowBuntings_ZH-CN6554424742.jpg 2](https://cn.bing.com/th?id=OHR.SnowBuntings_ZH-CN6554424742.jpg)
+    
+    *   在`.jpg`前加上分辨率，此方式下载出的图片即为调整后分辨率，==注意此种方式需要去掉UHD 等标识==
+        
+        > [https://cn.bing.com/th?id=OHR.RPIR_EN-US1987126650_1366x768.jpg 2](https://cn.bing.com/th?id=OHR.RPIR_EN-US1987126650_1366x768.jpg) ==去掉UHD标识==
+        > 
+        > [https://cn.bing.com/th?id=OHR.SnowBuntings_ZH-CN6554424742_1366x768.jpg 3](https://cn.bing.com/th?id=OHR.SnowBuntings_ZH-CN6554424742_1366x768.jpg)
+        
+    *   在地址最后加上参数，此方式适合无需下载的页面展示
+        
+        > [https://cn.bing.com/th?id=OHR.RPIR_EN-US1987126650_UHD.jpg&w=1366&h=768 4](https://cn.bing.com/th?id=OHR.RPIR_EN-US1987126650_UHD.jpg&w=1366&h=768) ==这里则可以继续使用UHD标识==
+        > 
+        > [https://cn.bing.com/th?id=OHR.SnowBuntings_ZH-CN6554424742.jpg&w=1366&h=768 4](https://cn.bing.com/th?id=OHR.SnowBuntings_ZH-CN6554424742.jpg&w=1366&h=768)
